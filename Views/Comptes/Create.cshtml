@@ -1,0 +1,52 @@
+﻿@model Banque.Models.ToutCompteDTO
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Compte</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Discriminator" class="control-label">Type de Compte</label>
+                <select asp-for="Discriminator" class ="form-control" asp-items="ViewBag.TypesComptes"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Solde" class="control-label"></label>
+                <input asp-for="Solde" class="form-control" />
+                <span asp-validation-for="Solde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientId" class="control-label"></label>
+                <select asp-for="ClientId" class ="form-control" asp-items="ViewBag.ClientId"></select>
+            </div>
+            @*possibilité d'ajouter un controle coté front pour vérifier que les champs suivants soient saisis selon le type compte selectionné*@
+            <div class="form-group"> 
+                <label asp-for="Taux" class="control-label"></label>
+                <input asp-for="Taux" class="form-control" />
+                <span asp-validation-for="Taux" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CoutOperation" class="control-label"></label>
+                <input asp-for="CoutOperation" class="form-control" />
+                <span asp-validation-for="CoutOperation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

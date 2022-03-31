@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Banque.Models.Operation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Operations</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Montant)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOperation)
+            </th>
+            <th>
+                Type d'Opération
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompteId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @(item.Montant >= 0 ? "+" : "")@Html.DisplayFor(modelItem => item.Montant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOperation)
+            </td>
+            <td>
+                @(item.Montant >= 0 ? "Dépôt" : "Retrait")
+            </td>
+            <td>
+            <a asp-controller="Comptes" asp-action="Details" asp-route-id="@item.CompteId">@Html.DisplayFor(modelItem => item.CompteId)</a>
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
